@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@color/backgrey"
+        android:orientation="vertical"
+android:weightSum="100"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_weight="50">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/amurlogo"/>
+            <ImageView
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/amur"/>
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+
+        android:orientation="vertical"
+        android:layout_weight="50">
+       <EditText
+           android:layout_width="match_parent"
+           android:layout_marginLeft="20dp"
+           android:layout_marginRight="20dp"
+           android:id="@+id/userid"
+           android:inputType="number"
+           android:hint="MOBILE NUMBER"
+           android:layout_height="wrap_content" />
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+           <com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="20dp"
+               android:layout_marginRight="20dp"
+android:inputType="numberPassword"
+               android:maxLength="5"
+               android:id="@+id/simplePassword"
+               android:hint="PIN"
+               /></RelativeLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:id="@+id/button2"
+    android:background="@drawable/capsule"
+    android:gravity="center"
+    android:layout_gravity="center">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:text="LOGIN"/>
+</LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:id="@+id/txtforg"
+            android:layout_gravity="center"
+            android:textColor="@color/textgrey"
+            android:text="Forgot Password?"/>
+    </LinearLayout>
+</LinearLayout>
+</android.support.constraint.ConstraintLayout>

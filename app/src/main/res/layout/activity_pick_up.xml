@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgrey"
+    android:weightSum="1"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+   >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="0.6"
+        android:layout_height="0dp">
+    <fragment
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/map"
+        tools:context=".MapsActivity"
+        map:cameraBearing="112.5"
+        map:cameraTargetLat="-1.288618"
+        map:cameraTargetLng="36.825580"
+        map:cameraTilt="30"
+
+
+
+        map:cameraZoom="12"
+        map:mapType="normal"
+        map:uiCompass="true"
+        map:uiRotateGestures="true"
+        map:uiScrollGestures="true"
+        map:uiTiltGestures="true"
+        map:uiZoomControls="true"
+        map:uiZoomGestures="true"
+        android:name="com.google.android.gms.maps.SupportMapFragment" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="0.4"
+        android:background="@color/actionbargrey"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:layout_height="0dp">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:weightSum="3">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:textSize="12sp"
+                android:id="@+id/txtcust"
+                android:layout_marginLeft="20dp"
+                android:text="DELIVER TO: SAMMY OWINO"
+                android:textColor="@color/white"
+
+                android:textStyle="bold" />
+
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:gravity="center"
+            android:background="@color/white"></View>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txarea"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:text="9WEST TOWERS" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txamo"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:text="MPAKA ROAD" />
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/mobnumb"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:text="WESTLANDS" />
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_height="wrap_content">
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="40dp"
+                android:id="@+id/callbutt"
+                android:background="@color/white"
+                android:foreground="?attr/selectableItemBackground"
+                android:text="DELIVER"
+                android:textColor="@color/textgrey" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="40dp"
+                android:id="@+id/nav"
+                android:background="@color/darkactionbargrey"
+                android:foreground="?attr/selectableItemBackground"
+                android:text="NAVIGATE"
+                android:textColor="#fff" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_height="wrap_content">
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="40dp"
+                android:id="@+id/callcust"
+                android:background="@color/white"
+                android:foreground="?attr/selectableItemBackground"
+                android:text="CALL CUSTOMER"
+                android:textColor="@color/textgrey" />
+
+
+        </LinearLayout>
+       <!-- <RelativeLayout
+            android:id="@+id/lycal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+android:layout_marginTop="10dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tv"
+                android:layout_height="10dp"
+
+                android:layout_width="10dp"
+
+                android:layout_marginTop="5dp"
+
+                android:textColor="#fff"
+                android:textSize="20sp"
+                android:background="@drawable/bg_red"
+
+
+
+                android:layout_marginLeft="70dp"
+                android:layout_alignParentLeft="true"
+                />
+            <View
+                android:id="@+id/div1"
+                android:layout_width="100dp"
+                android:layout_centerHorizontal="true"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+
+
+
+                android:background="@color/white" />
+
+
+
+            <TextView
+                android:id="@+id/tv3"
+                android:layout_height="10dp"
+
+                android:layout_width="10dp"
+
+                android:layout_marginTop="5dp"
+
+                android:textColor="#fff"
+                android:textSize="20sp"
+                android:background="@drawable/bg_transparent"
+
+
+                android:layout_marginRight="70dp"
+
+                android:layout_alignParentRight="true"
+                />
+
+
+            <TextView
+                android:id="@+id/textV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+               android:layout_marginLeft="60dp"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/tv"
+                android:textSize="13sp"
+android:layout_marginTop="5dp"
+                android:text="PICKED UP \n 11.35am"
+                android:textColor="@color/white" />
+            <TextView
+                android:id="@+id/textv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/tv"
+                android:textSize="13sp"
+android:layout_marginRight="60dp"
+                android:text="DELIVERED"
+                android:textColor="@color/white" />
+
+
+        </RelativeLayout>-->
+    </LinearLayout>
+</LinearLayout>

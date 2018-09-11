@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+
+   >
+
+
+    <LinearLayout
+
+
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+
+
+
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+
+            android:orientation="vertical"
+            android:paddingBottom="5dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+
+            <TextView
+                android:id="@+id/txtname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:text="FRIDAH PARE"
+                android:textColor="@color/actionbargrey"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/txtorder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_below="@+id/txtname"
+
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Order ID"
+                android:textColor="@color/actionbargrey"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/txtdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_below="@+id/txtorder"
+
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="25 December 2017 12:23"
+                android:textColor="@color/actionbargrey"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/txtamo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/txtdate"
+
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:text="1300 Kshs"
+                android:textColor="@color/actionbargrey"
+                android:textSize="14sp"
+
+                />
+            <TextView
+                android:id="@+id/txttimest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/txtamo"
+
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:text="N/A"
+                android:textColor="@color/actionbargrey"
+                android:textSize="14sp"
+
+                />
+
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</FrameLayout>

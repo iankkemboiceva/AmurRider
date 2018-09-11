@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "459064573626",
+    "firebase_url": "https://amurrider-1520856722027.firebaseio.com",
+    "project_id": "amurrider-1520856722027",
+    "storage_bucket": "amurrider-1520856722027.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:459064573626:android:c8433251a6288d00",
+        "android_client_info": {
+          "package_name": "amurrider.rider.com.amur.amurrider"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "459064573626-ro9aluc3kmjc00n3dpfp25sp2b0oo8e7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_ixpdmgO1qgAvA8ZZ4zlI1NeUAyTVkqM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
