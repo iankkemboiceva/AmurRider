@@ -73,7 +73,7 @@ public class FragmentDrawer extends Fragment implements View.OnClickListener {
     File finalFile;
 
     TextView tv,home,tvmobno,tvlastl;
-    String upurl = ApplicationConstants.IMG_URL+"image/profilepic?userId=";
+
     Button lyhomeid,lysignout;
     RelativeLayout header;
     //  private RecyclerView recyclerView;

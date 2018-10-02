@@ -27,8 +27,8 @@ public class TripDetails {
 	private String latit;
 	private String shworderid;
 	private String txntimest;
-
-	public TripDetails(String cust,String shippadr,String amount,String mobno,String orderid,String longt,String latit,String shworderid,String txntimest) {
+	private String paystat;
+	public TripDetails(String cust,String shippadr,String amount,String mobno,String orderid,String longt,String latit,String shworderid,String txntimest,String paystat) {
 		this.cust = cust;
 this.shippadr = shippadr;
 		this.amount = amount;
@@ -38,6 +38,7 @@ this.shippadr = shippadr;
 		this.longt = longt;
 		this.shworderid = shworderid;
 		this.txntimest = txntimest;
+		this.paystat = paystat;
 	}
 
 
@@ -99,5 +100,8 @@ this.shippadr = shippadr;
 
 	public String getTxntimest() {
 		return txntimest;
+	}
+	public String getPayStat() {
+		return paystat;
 	}
 }

@@ -150,9 +150,10 @@ amont = 0;
                                         String mobnumb = json_data.optString("mobileNumber");
                                         String txnAmt = json_data.optString("txnAmt");
                                         String txntimest = json_data.optString("txnDate");
+                                        String paystat = json_data.optString("paymentStatus");
 double txnamo = Double.parseDouble(txnAmt);
 amont += txnamo;
-                                        tripDetails.add(new TripDetails(custname,txshipaddr,txnAmt,mobnumb,orderid,longt,lat,shworderid,txntimest));
+                                        tripDetails.add(new TripDetails(custname,txshipaddr,txnAmt,mobnumb,orderid,longt,lat,shworderid,txntimest,paystat));
 
                                     } catch (JSONException e) {
                                         e.printStackTrace();

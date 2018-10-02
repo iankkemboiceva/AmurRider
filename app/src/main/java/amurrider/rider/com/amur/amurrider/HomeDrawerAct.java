@@ -1,7 +1,9 @@
 package amurrider.rider.com.amur.amurrider;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -110,15 +112,15 @@ public class HomeDrawerAct extends AppCompatActivity
         setContentView(R.layout.activity_home_drawer);
         session = new SessionManagement(getApplicationContext());
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-       layoutBottomSheet = (LinearLayout) findViewById(R.id.bottom_sheet);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+       layoutBottomSheet = findViewById(R.id.bottom_sheet);
 
-        lymapsview = (LinearLayout) findViewById(R.id.lymapsvw);
-        lyorderview = (LinearLayout) findViewById(R.id.lyorder);
-        rlinst = (RelativeLayout) findViewById(R.id.rllistinterv);
-        v1 = (View) findViewById(R.id.v1);
-        v2 = (View) findViewById(R.id.v2);
-        lymapsfrag = (LinearLayout) findViewById(R.id.lymaps);
+        lymapsview = findViewById(R.id.lymapsvw);
+        lyorderview = findViewById(R.id.lyorder);
+        rlinst = findViewById(R.id.rllistinterv);
+        v1 = findViewById(R.id.v1);
+        v2 = findViewById(R.id.v2);
+        lymapsfrag = findViewById(R.id.lymaps);
         lymapsview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -139,23 +141,23 @@ public class HomeDrawerAct extends AppCompatActivity
                 v2.setVisibility(View.GONE);
             }
         });
-        ivclose = (ImageView) findViewById(R.id.close);
+        ivclose = findViewById(R.id.close);
 
 
-        txarea = (TextView) findViewById(R.id.txarea);
-        txcust = (TextView) findViewById(R.id.txtcust);
-        txmobnumb = (TextView) findViewById(R.id.mobnumb);
-        txamo = (TextView) findViewById(R.id.txamo);
-
-
-
+        txarea = findViewById(R.id.txarea);
+        txcust = findViewById(R.id.txtcust);
+        txmobnumb = findViewById(R.id.mobnumb);
+        txamo = findViewById(R.id.txamo);
 
 
 
-        lv = (ListView) findViewById(R.id.lv);
-        btncall = (Button) findViewById(R.id.callbutt);
-        btndeliver = (Button) findViewById(R.id.deliverbutt);
-        imgvw = (ImageView) findViewById(R.id.imgvw);
+
+
+
+        lv = findViewById(R.id.lv);
+        btncall = findViewById(R.id.callbutt);
+        btndeliver = findViewById(R.id.deliverbutt);
+        imgvw = findViewById(R.id.imgvw);
         btndeliver.setOnClickListener(this);
         btncall.setOnClickListener(this);
         imgvw.setOnClickListener(this);
@@ -194,7 +196,7 @@ public class HomeDrawerAct extends AppCompatActivity
 toggleBottomSheet();
             }
         });
-        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        TextView mTitle = toolbar.findViewById(R.id.toolbar_title);
 
         setSupportActionBar(toolbar);
         mTitle.setText("RIDER");
@@ -205,7 +207,7 @@ toggleBottomSheet();
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
       toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
@@ -233,7 +235,26 @@ lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
         finlat = tripDetails.get(clickCount).getLatit();
         finlongit = tripDetails.get(clickCount).getLongt();
         txmobno = mobnumb;
-        InitDelivery(fntxtorderid);
+        AlertDialog alertDialog = new AlertDialog.Builder(HomeDrawerAct.this).create();
+        alertDialog.setTitle("Confirm Delivery");
+        alertDialog.setMessage("Are you sure you wish to proceed with delivery? This will commence the delivery");
+
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        InitDelivery(fntxtorderid);
+                    }
+                });
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        alertDialog.show();
+
     }
 });
         pDialog.setCancelable(false);
@@ -290,7 +311,7 @@ lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
     }
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -318,7 +339,7 @@ lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 
             case android.R.id.home:
-                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                DrawerLayout drawer = findViewById(R.id.drawer_layout);
 
                     drawer.openDrawer(drawer);
 
@@ -348,7 +369,7 @@ lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -409,7 +430,7 @@ Log.v("Click Count Number",Integer.toString(clickCount));
                 return false;
             }
         });
-        // Add a marker in Sydney, Australia, and move the camera.
+
 
     }
     private void FetchRiders(String params) {
@@ -484,7 +505,7 @@ tripDetails.clear();
                             if (js.length() > 0) {
 String finallongt = "";
 String finallat = "";
-//Check github comment
+//Check github comment.
 
                                 JSONObject json_data = null;
                                 int jslength = js.length()-1;
@@ -501,7 +522,8 @@ String finallat = "";
                                         String mobnumb = json_data.optString("mobileNumber");
                                         String txnAmt = json_data.optString("txnAmt");
                                         String txntimest = json_data.optString("txnDate");
-                                        tripDetails.add(new TripDetails(custname,txshipaddr,txnAmt,mobnumb,orderid,longt,lat,shworderid,txntimest));
+                                        String paystat = json_data.optString("paymentStatus");
+                                        tripDetails.add(new TripDetails(custname,txshipaddr,txnAmt,mobnumb,orderid,longt,lat,shworderid,txntimest,paystat));
 
 
                                         mMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(lat), Double.parseDouble(longt))).title(custname).icon(BitmapDescriptorFactory.fromResource(R.drawable.markerone))).setTag(i);
@@ -601,7 +623,26 @@ String finallat = "";
         if(view.getId() == R.id.deliverbutt){
            /* Intent intent = new Intent(HomeDrawerAct.this, PickUpActivity.class);
             startActivity(intent);*/
-           InitDelivery(fntxtorderid);
+            AlertDialog alertDialog = new AlertDialog.Builder(HomeDrawerAct.this).create();
+            alertDialog.setTitle("Confirm Delivery");
+            alertDialog.setMessage("Are you sure you wish to proceed with delivery? This will commence the delivery");
+
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Yes",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            InitDelivery(fntxtorderid);
+                        }
+                    });
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "No",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+
+            alertDialog.show();
+
         }
         if(view.getId() == R.id.imgvw){
             String riderid = session.getString("RIDERID");

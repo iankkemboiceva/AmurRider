@@ -72,13 +72,27 @@
                 android:text="25 December 2017 12:23"
                 android:textColor="@color/actionbargrey"
                 android:textSize="14sp" />
+            <TextView
+                android:id="@+id/txttimest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/txtdate"
+
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="N/A"
+                android:textColor="@color/actionbargrey"
+                android:textSize="14sp"
+
+                />
 
             <TextView
                 android:id="@+id/txtamo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:layout_below="@id/txtdate"
+                android:layout_below="@id/txttimest"
 
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
@@ -87,8 +101,10 @@
                 android:textSize="14sp"
 
                 />
+
+
             <TextView
-                android:id="@+id/txttimest"
+                android:id="@+id/paystat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -96,14 +112,16 @@
 
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
+                android:textStyle="bold"
                 android:text="N/A"
                 android:textColor="@color/actionbargrey"
-                android:textSize="14sp"
+                android:textSize="16sp"
 
                 />
 
-
         </RelativeLayout>
     </LinearLayout>
+
+
 
 </FrameLayout>

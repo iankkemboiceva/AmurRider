@@ -74,6 +74,7 @@ public class MyPendingOrders extends ArrayAdapter<TripDetails> implements Filter
 			TextView txamo = (TextView) v.findViewById(R.id.txtamo);
 			TextView txorderid = (TextView) v.findViewById(R.id.txtorder);
 			TextView txtimest = (TextView) v.findViewById(R.id.txttimest);
+			TextView txtpaystat = (TextView) v.findViewById(R.id.paystat);
 		/*	TextView accid = (TextView) v.findViewById(R.id.txt);
             TextView curr = (TextView) v.findViewById(R.id.txt2);
 			TextView taxref = (TextView) v.findViewById(R.id.txtref);
@@ -87,6 +88,7 @@ public class MyPendingOrders extends ArrayAdapter<TripDetails> implements Filter
 			holder.txtamo = txamo;
 			holder.txtorderid = txorderid;
 			holder.txttimest = txtimest;
+			holder.paystat =  txtpaystat;
 
 			
 			v.setTag(holder);
@@ -102,6 +104,7 @@ public class MyPendingOrders extends ArrayAdapter<TripDetails> implements Filter
 
 		String mobnumb = p.getMobno();
 		String timest = p.getTxntimest();
+		String pst = p.getPayStat();
        // String convd = getDateTimeStamp(tdate);
 
 
@@ -110,6 +113,7 @@ public class MyPendingOrders extends ArrayAdapter<TripDetails> implements Filter
         holder.txtorderid.setText("ORDER ID:"+toorder);
         holder.txtdate.setText("MOBILE NUMBER: "+mobnumb);
         holder.txttimest.setText(timest);
+        holder.paystat.setText(pst);
 
 
 		
@@ -132,6 +136,7 @@ public class MyPendingOrders extends ArrayAdapter<TripDetails> implements Filter
 		public TextView txtdate;
 		public TextView txtorderid;
 		public TextView txttimest;
+		public TextView paystat;
 	}
     public static String getDateTimeStamp(String tdate) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
