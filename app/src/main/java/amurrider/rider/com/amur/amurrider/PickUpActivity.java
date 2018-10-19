@@ -5,8 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Location;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Looper;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -18,6 +21,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -25,6 +33,9 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.pubnub.api.callbacks.PNCallback;
+import com.pubnub.api.models.consumer.PNPublishResult;
+import com.pubnub.api.models.consumer.PNStatus;
 
 import org.json.JSONObject;
 
@@ -36,9 +47,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+import util.Constants;
 
 public class PickUpActivity extends AppCompatActivity implements OnMapReadyCallback, View.OnClickListener {
 
@@ -49,6 +62,9 @@ public class PickUpActivity extends AppCompatActivity implements OnMapReadyCallb
     String cust, lat, longitu;
     Button btncall;
     String mobnumbs;
+    private FusedLocationProviderClient mFusedLocationClient; // Object used to receive location updates
+
+    private LocationRequest locationRequest; // Object that defines important parameters regarding location request.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +109,20 @@ public class PickUpActivity extends AppCompatActivity implements OnMapReadyCallb
             txtmobnumb.setText("MOBILE NUMBER " + mobnumbs);
             txtamo.setText(txamo + "KSHS");
         }
+
+
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        locationRequest = LocationRequest.create();
+        locationRequest.setInterval(10000); // 5 second delay between each request
+        locationRequest.setFastestInterval(10000); // 5 seconds fastest time in between each request
+        locationRequest.setSmallestDisplacement(20); // 10 meters minimum displacement for new location request
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY); // enables GPS high accuracy location requests
+
+        sendUpdatedLocationMessage();
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.M) {
+            checkPermission();
+        }
     }
 
     @Override
@@ -100,6 +130,40 @@ public class PickUpActivity extends AppCompatActivity implements OnMapReadyCallb
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
+
+    /*
+       This method gets user's current location and publishes message to channel.
+    */
+    private void sendUpdatedLocationMessage() {
+        try {
+            mFusedLocationClient.requestLocationUpdates(locationRequest, new LocationCallback() {
+                @Override
+                public void onLocationResult(LocationResult locationResult) {
+
+                    Location location = locationResult.getLastLocation();
+                    LinkedHashMap<String, String> message = getNewLocationMessage(location.getLatitude(), location.getLongitude());
+                    HomeDrawerAct.pubnub.publish()
+                            .message(message)
+                            .channel(orderid)
+                            .async(new PNCallback<PNPublishResult>() {
+                                @Override
+                                public void onResponse(PNPublishResult result, PNStatus status) {
+                                    // handle publish result, status always present, result if successful
+                                    // status.isError() to see if error happened
+                                    Log.v("Check pubnub",Integer.toString(status.getStatusCode()));
+                                    if (!status.isError()) {
+                                        System.out.println("pub timetoken: " + result.getTimetoken());
+                                    }
+                                    System.out.println("pub status code: " + status.getStatusCode());
+                                }
+                            });
+                }
+            }, Looper.myLooper());
+
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -324,5 +388,23 @@ public class PickUpActivity extends AppCompatActivity implements OnMapReadyCallb
             urlConnection.disconnect();
         }
         return data;
+    }
+
+    private LinkedHashMap<String, String> getNewLocationMessage(double lat, double lng) {
+        LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
+        map.put("lat", String.valueOf(lat));
+        map.put("lng", String.valueOf(lng));
+        return map;
+    }
+
+    public void checkPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                ) {//Can add more as per requirement
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                    123);
+        }
     }
 }

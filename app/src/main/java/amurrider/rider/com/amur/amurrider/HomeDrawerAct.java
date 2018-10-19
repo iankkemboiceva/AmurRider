@@ -50,6 +50,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.microsoft.windowsazure.notifications.NotificationsManager;
+import com.pubnub.api.PNConfiguration;
+import com.pubnub.api.PubNub;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -79,6 +81,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+import util.Constants;
 
 public class HomeDrawerAct extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, FragmentDrawer.FragmentDrawerListener,GoogleMap.OnMarkerClickListener, View.OnClickListener {
@@ -103,7 +106,7 @@ public class HomeDrawerAct extends AppCompatActivity
     MyPendingOrders aAdpt;
     ImageView ivclose;
     ListView lv;
-
+    public static PubNub pubnub; // Pubnub instance
     View v1,v2;
 
     @Override
@@ -234,6 +237,8 @@ lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
         finlatit = tripDetails.get(clickCount).getOrderId();
         finlat = tripDetails.get(clickCount).getLatit();
         finlongit = tripDetails.get(clickCount).getLongt();
+        String ntpaid = tripDetails.get(clickCount).getPayStat();
+        session.setString("NTPAID",ntpaid);
         txmobno = mobnumb;
         AlertDialog alertDialog = new AlertDialog.Builder(HomeDrawerAct.this).create();
         alertDialog.setTitle("Confirm Delivery");
@@ -265,7 +270,16 @@ lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
         NotificationsManager.handleNotifications(this, NotificationSettings.SenderId, MyHandler.class);
         registerWithNotificationHubs();
+        initPubnub();
        // ShowRoute();
+    }
+
+    private void initPubnub() {
+        PNConfiguration pnConfiguration = new PNConfiguration();
+        pnConfiguration.setSubscribeKey(Constants.PUBNUB_SUBSCRIBE_KEY);
+        pnConfiguration.setPublishKey(Constants.PUBNUB_PUBLISH_KEY);
+        pnConfiguration.setSecure(true);
+        pubnub = new PubNub(pnConfiguration);
     }
     public void registerWithNotificationHubs()
     {

@@ -26,7 +26,8 @@ public class ConfirmDelivery extends AppCompatActivity implements View.OnClickLi
     LinearLayout btnnext;
     ProgressDialog pDialog;
     String params,amo,shipadr;
-    TextView txamo,txshpadr,txcust;
+    TextView txamo,txshpadr,txcust,txnpaid;
+    SessionManagement session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +36,8 @@ public class ConfirmDelivery extends AppCompatActivity implements View.OnClickLi
         txamo = (TextView) findViewById(R.id.txamo);
         txshpadr = (TextView) findViewById(R.id.txdest);
         txcust = (TextView) findViewById(R.id.txtcust);
+        txnpaid = (TextView) findViewById(R.id.ntpaid);
+        session = new SessionManagement(getApplicationContext());
         btnnext.setOnClickListener(this);
 
         pDialog = new ProgressDialog(this);
@@ -51,6 +54,8 @@ public class ConfirmDelivery extends AppCompatActivity implements View.OnClickLi
            txcust.setText(textcs.toUpperCase());
             txamo.setText(amo+"Ksh");
             txshpadr.setText(shipadr);
+            String strpd = session.getString("NTPAID");
+            txnpaid.setText(strpd);
 
         }
     }
